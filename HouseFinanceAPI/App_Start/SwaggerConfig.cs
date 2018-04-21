@@ -105,9 +105,8 @@ namespace HouseFinanceAPI
                         //
                         //c.IncludeXmlComments(GetXmlCommentsPath());
 
-                        
-c.IncludeXmlComments(string.Format(@" {0}bin\HouseFinanceAPI.xml", System.AppDomain.CurrentDomain.BaseDirectory));
 
+                        c.IncludeXmlComments(string.Format(@" {0}bin\HouseFinanceAPI.xml", System.AppDomain.CurrentDomain.BaseDirectory));
 
                         c.DescribeAllEnumsAsStrings();
 
