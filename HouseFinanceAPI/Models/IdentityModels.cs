@@ -52,9 +52,9 @@ namespace HouseFinanceAPI.Models
         //}
 
 
-        public async Task<PersonalAccount> GetAccountsBalance(int hhId)
+        public async Task<decimal> GetAccountsBalance(int hhId)
         {
-            return await Database.SqlQuery<PersonalAccount>("GetAccountsBalance @hhId",
+            return await Database.SqlQuery<decimal>("GetAccountsBalance @hhId",
                 new SqlParameter("hhId", hhId)).FirstOrDefaultAsync(); //is this wrong???!!!! something other than firstordefault???
         }
 
@@ -80,10 +80,12 @@ namespace HouseFinanceAPI.Models
         }
 
 
-        public async Task<List<BudgetItem>> GetBudgetGoalsBalance(int hhId)
+        public async Task<decimal> GetBudgetGoalsBalance(int hhId)
+
+//The data reader has more than one field.Multiple fields are not valid for EDM primitive or enumeration types. So does not like a list of decimals.
         {
-            return await Database.SqlQuery<BudgetItem>("GetBudgetGoalsBalance @hhId",
-    new SqlParameter("hhId", hhId)).ToListAsync();
+            return await Database.SqlQuery<decimal>("GetBudgetGoalsBalance @hhId",
+    new SqlParameter("hhId", hhId)).FirstOrDefaultAsync();
         }
 
         public async Task<Household> GetHousehold(int Id)

@@ -79,7 +79,7 @@ namespace HouseFinanceAPI.Controllers
         /// <param name="hhId">Household ID</param>
         /// <returns></returns>
         [Route("GetAccountsBalance")]
-        public async Task<PersonalAccount> GetAccountsBalance(int hhId)
+        public async Task<decimal> GetAccountsBalance(int hhId)
         {
             return await db.GetAccountsBalance(hhId);
         }
@@ -127,7 +127,7 @@ namespace HouseFinanceAPI.Controllers
         /// <param name="hhId">Household ID</param>
         /// <returns></returns>
         [Route("GetBudgetGoalsBalance")]
-        public async Task<List<BudgetItem>> GetBudgetGoalsBalance(int hhId)
+        public async Task<decimal> GetBudgetGoalsBalance(int hhId)
         {
             return await db.GetBudgetGoalsBalance(hhId);
         }
