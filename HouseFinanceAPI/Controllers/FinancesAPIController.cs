@@ -148,7 +148,7 @@ namespace HouseFinanceAPI.Controllers
 
 
         /// <summary>
-        /// Get transaction details
+        /// Get transaction details.
         /// </summary>
         /// <param name="acctId">Account ID</param>
         /// <returns></returns>
@@ -169,7 +169,7 @@ namespace HouseFinanceAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Add transaction to an account.
         /// </summary>
         /// <param name="accountId">Account ID</param>
         /// <param name="description">Description of the expense or credit</param>
@@ -196,7 +196,7 @@ namespace HouseFinanceAPI.Controllers
         /// Add an account to a household.
         /// </summary>
         /// <param name="hhId">Household ID</param>
-        /// <param name="desc">Account name/param>
+        /// <param name="desc">Account name</param>
         /// <param name="balance">Amount in the account</param>
         /// <param name="recBalance"></param>
         /// <param name="user"> Resident ID</param>
@@ -210,7 +210,7 @@ namespace HouseFinanceAPI.Controllers
         }
 
         /// <summary>
-        /// Add a budget goal
+        /// Add a budget goal.
         /// </summary>
         /// <param name="hhId">Household ID</param>
         /// <param name="name">Name of the goal or budget</param>
@@ -223,7 +223,7 @@ namespace HouseFinanceAPI.Controllers
         }
 
         /// <summary>
-        /// Budget item
+        /// Budget item.
         /// </summary>
         /// <param name="caty">Categories include: Food = 3, Utilities = 4, Medical = 5, Insurance = 6, Housing =7, Transportation = 8, Clothing = 9, Personal = 10, House Supplies = 11, Debt = 12, Retirement = 13, Education = 14, Savings = 15, Gifts/Donations = 16, Entertainment = 17</param>
         /// <param name="budgId">Budget ID</param>
@@ -237,7 +237,7 @@ namespace HouseFinanceAPI.Controllers
         }
 
         /// <summary>
-        /// Create Household
+        /// Create household.
         /// </summary>
         /// <param name="user">Resident ID</param>
         /// <returns></returns>
