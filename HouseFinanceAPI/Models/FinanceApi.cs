@@ -136,7 +136,30 @@ namespace HouseFinanceAPI.Models
 
         }
 
+        public class ChartData
+        {
+            public virtual Transaction Transactions { get; set; }
+            public string X { get; set; }
+            public decimal Y { get; set; }
 
+        }
+
+
+        public class FusionData
+        {
+            public virtual Transaction Transactions { get; set; }
+            public string Label { get; set; }
+            public decimal Value { get; set; }
+
+        }
+
+        public class HouseChart
+        {
+            public virtual PersonalAccount PersonalAccount { get; set; }
+            public string Label { get; set; }
+            public decimal Value { get; set; }
+
+        }
 
     }
 }

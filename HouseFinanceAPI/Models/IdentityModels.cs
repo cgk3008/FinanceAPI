@@ -59,6 +59,19 @@ namespace HouseFinanceAPI.Models
         }
 
 
+        //[Route("GetAccountsByHouseholdForCHarts")]
+        //public async Task<List<PersonalAccount>> GetAccountsByHouseholdForCharts(int hhId)
+        //{
+        //    return await db.GetAccounts(hhId);
+        //}
+
+         
+        public async Task<List<HouseChart>> GetAccountsByHouseForCharts(int hhId)
+        {
+            return await Database.SqlQuery<HouseChart>("GetAccountsByHouseForCharts @hhId",
+                new SqlParameter("hhId", hhId)).ToListAsync();
+        }
+
         public async Task<List<PersonalAccount>> GetAccountsByHousehold(string Household)
         {
             return await Database.SqlQuery<PersonalAccount>("GetAccountsByHousehold @Household",

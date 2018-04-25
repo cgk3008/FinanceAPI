@@ -60,17 +60,25 @@ namespace HouseFinanceAPI.Controllers
         //    return db.
         //}
 
+        [Route("GetAccountsByHouseForCharts")]
+        public async Task<List<HouseChart>> GetAccountsByHouseForCharts(int hhId)
+        {
+            return await db.GetAccountsByHouseForCharts(hhId);
+        }
 
-///// <summary>
-///// 
-///// </summary>
-///// <param name="hhId"></param>
-///// <returns></returns>
-//        [Route("GetAccountDetails")]
-//        public async Task<PersonalAccount> GetAccountDetails( int hhId)
-//        {
-//            return await db.GetAccountsBalance( hhId);
-//        }
+
+
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="hhId"></param>
+        ///// <returns></returns>
+        //        [Route("GetAccountDetails")]
+        //        public async Task<PersonalAccount> GetAccountDetails( int hhId)
+        //        {
+        //            return await db.GetAccountsBalance( hhId);
+        //        }
 
 
         /// <summary>

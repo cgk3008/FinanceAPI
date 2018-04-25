@@ -1,24 +1,194 @@
 ﻿<div class="jumbotron">
-    <h1>House Finance API</h1>
-    <p class="lead">This application allows you to create a household budget and enter transactions to track expenses and income. </p>
-    <p><a href="http://ckhousefinanceapi.azurewebsites.net/swagger/ui/index#/FinancesAPI" class="btn btn-primary btn-lg">House Finances &raquo;</a></p>
+	<h1>House Finance API</h1>
+	<p class="lead">This application allows you to create a household budget and enter transactions to track expenses and income. </p>
+	<p><a href="http://ckhousefinanceapi.azurewebsites.net/swagger/ui/index#/FinancesAPI" class="btn btn-primary btn-lg">House Finances &raquo;</a></p>
 </div>
 @*<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>*@
+	<div class="col-md-4">
+		<h2>Getting started</h2>
+		<p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
+		a broad range of clients, including browsers and mobile devices. ASP.NET Web API
+		is an ideal platform for building RESTful applications on the .NET Framework.</p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+	</div>
+	<div class="col-md-4">
+		<h2>Get more libraries</h2>
+		<p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+	</div>
+	<div class="col-md-4">
+		<h2>Web Hosting</h2>
+		<p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+		<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+	</div>*@
 </div>
+
+<div class="jumbotron">
+	<h1>Sample Financial Portal Dashboard</h1>
+	<p class="lead">Once our REST API is up and running we can grab data from it and use it to power our application dashboard...</p>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>Show some Household data</h3>
+		<input type="text" id="houseNum" />
+		<input type="button" value="" onclick="find();" />
+		<p id="houses"></p>
+	</div>
+
+
+	@*$("button").click(function(){
+	$.getJSON("demo_ajax_json.js", function(result){
+	$.each(result, function(i, field){
+	$("div").append(field + " ");
+	});
+	});
+	});*@
+
+
+	<div class="col-md-4">
+		<h3>Show some Account data</h3>
+		<input type="text" id="houseNum2" />
+		<input type="button" value="Search" onclick="findAccounts();" />
+		@*<ul id="accounts"></ul>*@
+		<p id="accounts"></p>
+	</div>
+
+	<div class="row">
+		<div id="MyChart" style="height: 250px;" class="col-md-6">
+
+		</div>
+		<div class="col-md-6"></div>
+	</div>
+
+	<div id="chartContainer">FusionCharts example here!</div>
+
+	<div id="financeapiContainr">My Finance data displayed in a fusion chart!</div>
+
+	<p>If this works I should see data below...</p>
+	<div>
+		<ul id="rawapidata"></ul>
+	</div>
+
+	<div id="myRealTimeApiData">My data displayed in a fusion chart!</div>
+
+</div>
+
+@section scripts{
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+	<!-- Fusion charts-->
+	<script src="~/Scripts/js/fusioncharts.js"></script>
+	<script src="~/Scripts/js/fusioncharts.charts.js"></script>
+	<script src="~/Scripts/js/fusioncharts.widgets.js"></script>
+	<script src="~/Scripts/js/fusioncharts.powercharts.js"></script>
+	<script src="~/Scripts/js/themes/fusioncharts.theme.fint.js"></script>
+
+	<script>
+
+        @*var uri = '../Api/FinancialPortal/Households/json?id=';
+        var uri2 = '../Api/FinancialPortal/Accounts/json?householdId=';
+
+        function find() {
+            var id = $('#houseNum').val();
+            $.getJSON(uri + id)
+                .done(function(data) {
+                    var jsonObj = $.parseJSON(data);
+                    $('#houses').text('Name: ' + jsonObj.Name + ' --> Id: ' + jsonObj.Id);
+                })
+                .fail(function(jqXhr, textStatus, err) {
+                    $('#houses').text('Error: ' + err);
+                });
+        }
+
+        function findAccounts() {
+            var id = $('#houseNum2').val();
+            $.getJSON(uri2 + id)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        //// Add a list item for the product.
+                        //$('<li>', { text: formatItem(item) }).appendTo($('#products'));
+                        $('#accounts').text('Name: ' + item.Name + "Balance: " + item.Balance);
+                    });
+
+                    //var jsonObj = $.parseJSON(data);
+                    //$('#accounts').text(data);
+                })
+                .fail(function(jqXhr, textStatus, err) {
+                    $('#accounts').text('Error: ' + err);
+                });
+        }
+
+        function testCharting() {
+            $(".ajaxchart").click(function() {
+                var url = '@Url.Action("GetChartDataAjax", "Home")' + '?type=' + $(this).html();
+                $.post(url).then(function(response) {
+                    $('#chart').empty();
+                    new Morris.Bar({
+                        element: 'chart',
+                        data: response,
+                        xkey: 'x',
+                        ykeys: ['y'],
+                        labels: ['Amount']
+                    });
+                })
+            })
+        }*@
+
+  
+
+
+        $(document).ready(function () {
+
+			var uri = '../Api/FinancialPortal/GetAccountsByHouseForCharts?householdId=4';
+            // Send an AJAX request
+            $.getJSON(uri).done(function (data) {
+                // On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                    // Add a list item for the product.
+                    $('<li>', { text: formatItem(item) }).appendTo($('#rawapidata'));
+                });
+            });
+        });
+
+        function formatItem(item) { return item.Label + ': $' + item.Value; }
+
+        $(document).ready(function () {
+			var endpoint = '../Api/FinancialPortal/GetAccountsByHouseForCharts?householdId=4';
+			var myId = 4;
+
+				// Send an AJAX request
+				$.getJSON(endpoint + myId).done(function (data) {
+                // On success, 'data' contains a list of products.
+                //FusionCharts.ready(function () {
+                    var revenueChart = new FusionCharts({
+                        "type": "column3d",
+                        "renderAt": "myRealTimeApiData",//name of the <div>
+                        "width": "500",
+                        "height": "300",
+                        "dataFormat": "json",
+                        "dataSource": {
+                            "chart": {
+                                "caption": "Real Time Household data",
+                                "subCaption": "Account(s) Summary",
+                                "xAxisName": "Name",
+                                "yAxisName": " Balances (In USD)",
+                                "theme": "fint"
+                            },
+                            "data": data
+                        }
+                    });
+
+                    revenueChart.render();
+                //});
+            });
+        });
+
+
+	</script>
+}
+
+
