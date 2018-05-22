@@ -155,7 +155,7 @@ namespace HouseFinanceAPI.Models
 
         public class HouseChart
         {
-            public virtual PersonalAccount PersonalAccount { get; set; }
+            //public virtual PersonalAccount PersonalAccount { get; set; }
             public string Label { get; set; }
             public decimal Value { get; set; }
 
